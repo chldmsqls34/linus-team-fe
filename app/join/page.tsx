@@ -1,4 +1,3 @@
-
 'use client';
 import React, {useState} from "react";
 import './style.css';
@@ -8,6 +7,7 @@ export default function Register() {
     const handleCheckChange = () => {
         setChecked(!checked);
     };
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
 

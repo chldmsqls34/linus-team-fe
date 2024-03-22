@@ -17,7 +17,7 @@ export default function Login() {
     alert("리퀘스트가 가져가는 아이디 : " + username);
     alert("리퀘스트가 가져가는 비밀번호 :"+password)
     const url = `${SERVER}/login`
-    const data = { username: username,password:password };
+    const data = { username,password};
     const config = {
       "Cache-Control": "no-cache",
       "Content-Type": "application/json",

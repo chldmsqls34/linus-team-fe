@@ -1,45 +1,67 @@
-"use client";
-import axios from "axios";
-import { useState } from "react";
-const SERVER = "http://localhost:8080";
+'use client';
+import React, {useState} from "react";
+import './style.css';
 
+export default function Register() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [repeatPassword, setRepeatPassword] = useState("");
 
-export default function Join() {
-  const [username, setUsername] = useState("");
-  const[password,setPassword]=useState("")
-  const handleUsername = (e : any)=>{
-    setUsername(e.target.value)
-  }
-  const handlePassword = (e : any)=>{
-    setPassword(e.target.value)
-  }
-  const handleSubmit = ()=>{
-    alert("리퀘스트가 가져가는 아이디 : " + username);
-    alert("리퀘스트가 가져가는 비밀번호 :"+password)
-    const url = `${SERVER}/login`
-    const data = { username: username,password:password };
-    const config = {
-      "Cache-Control": "no-cache",
-      "Content-Type": "application/json",
-      Authorization: "Bearer blah ~",
-      "Access-Control-Allow-Origin": "*",
-    }
+    const onFormSubmit = (e) => {
+        e.preventDefault();
+        if (password !== repeatPassword) {
+            alert("Passwords do not match");
+            return;
+        }
+    };
 
-    axios.post(url, data, {headers: config}).then(res => {
-      alert("리스판스가 가져온 이름: " + JSON.stringify(res.data.username))
-      alert("리스판스가 가져온 비밀번호:"+JSON.stringify(res.data.password))
-    })
+    return (<>
+            <div>
+                <h1>Sign Up</h1>
+                <p>Please fill in this form to create an account.</p>
+                <hr/>
 
-  }
+                <form onSubmit={onFormSubmit}>
+                    <label>
+                        Email
+                        <input
+                            type="text"
+                            placeholder="Enter Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </label>
 
-  return (
-    <>
-    <p>아이디 입력</p>
-    <input type="email" onChange={handleUsername} />
-    <p>비밀번호 입력</p>
-    <input type="password" onChange={handlePassword}></input>
-    <br />
-    <button onClick={handleSubmit}>전송</button>
-    </>
-  );
+                    <label>
+                        Password
+                        <input
+                            type="password"
+                            placeholder="Enter Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </label>
+
+                    <label>
+                        Repeat Password
+                        <input
+                            type="password"
+                            placeholder="Repeat Password"
+                            value={repeatPassword}
+                            onChange={(e) => setRepeatPassword(e.target.value)}
+                            required
+                        />
+                    </label>
+
+                    <div>
+                        <button type="submit">Sign Up</button>
+                    </div>
+                </form>
+            </div>
+        </>
+    );
 }
+
+   

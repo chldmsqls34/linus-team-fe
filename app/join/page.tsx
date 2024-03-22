@@ -1,39 +1,68 @@
-"use client";
-import axios from "axios";
-import { useState } from "react";
-const SERVER = "http://localhost:8080";
 
+'use client';
+import React, {useState} from "react";
+import './style.css';
 
-export default function Join() {
-  const [username, setUsername] = useState("");
-  const[password,setPassword]=useState("")
-  const[name,setName]=useState("");
-  const handleUsername = (e : any)=>{
-    setUsername(e.target.value)
-  }
-  const handlePassword = (e : any)=>{
-    setPassword(e.target.value)
-  }
-  const handleName = (e : any)=>{
-    setName(e.target.value)
-  }
-  
-  const handleSubmit = ()=>{
-    
-    
+export default function Register() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [repeatPassword, setRepeatPassword] = useState("");
 
+    const onFormSubmit = (e) => {
+        e.preventDefault();
+        if (password !== repeatPassword) {
+            alert("Passwords do not match");
+            return;
+        }
+    };
 
-  }
+    return (<>
+            <div>
+                <h1>Sign Up</h1>
+                <p>Please fill in this form to create an account.</p>
+                <hr/>
 
-  return (
-    <>
-    <p>아이디 입력</p>
-    <input type="email" value={username} placeholder="aaa@aa.com" onChange={handleUsername} />
-    <p>비밀번호 입력</p>
-    <input type="password" value={password} onChange={handlePassword}></input>
-    <br />
-    <input type="text" value={name} onChange={handleName}></input>
-    <button onClick={handleSubmit}>전송</button>
-    </>
-  );
+                <form onSubmit={onFormSubmit}>
+                    <label>
+                        Email
+                        <input
+                            type="text"
+                            placeholder="Enter Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </label>
+
+                    <label>
+                        Password
+                        <input
+                            type="password"
+                            placeholder="Enter Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </label>
+
+                    <label>
+                        Repeat Password
+                        <input
+                            type="password"
+                            placeholder="Repeat Password"
+                            value={repeatPassword}
+                            onChange={(e) => setRepeatPassword(e.target.value)}
+                            required
+                        />
+                    </label>
+
+                    <div>
+                        <button type="submit">Sign Up</button>
+                    </div>
+                </form>
+            </div>
+        </>
+    );
 }
+
+

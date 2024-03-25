@@ -15,8 +15,7 @@ export default function Login() {
   }
   const handleSubmit = ()=>{
     alert("리퀘스트가 가져가는 아이디 : " + username);
-    alert("리퀘스트가 가져가는 비밀번호 :"+password)
-    const url = `${SERVER}/login`
+    const url = `${SERVER}/api/login`
     const data = { username,password};
     const config = {
       "Cache-Control": "no-cache",
@@ -25,9 +24,11 @@ export default function Login() {
       "Access-Control-Allow-Origin": "*",
     }
 
-    axios.post(url, data, {headers: config}).then(res => {
-      alert("리스판스가 가져온 이름: " + JSON.stringify(res.data.username))
-      alert("리스판스가 가져온 비밀번호:"+JSON.stringify(res.data.password))
+    axios.post(url, data, {headers: config})
+    .then(res => {
+      const message = res.data.message
+      alert((message))
+     
     })
 
   }

@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import { useState } from "react";
-const SERVER = "http://localhost:8080/api";
+const SERVER = "http://localhost:8080";
 
 
 export default function Login() {
@@ -16,7 +16,7 @@ export default function Login() {
   const handleSubmit = ()=>{
     alert("리퀘스트가 가져가는 아이디 : " + username);
     alert("리퀘스트가 가져가는 비밀번호 :"+password)
-    const url = `${SERVER}/login`
+    const url = `${SERVER}/api/login`
     const data = { username,password};
     const config = {
       "Cache-Control": "no-cache",
@@ -48,7 +48,7 @@ export default function Login() {
   return (
     <>
     <p>아이디 입력</p>
-    <input type="email" onChange={handleUsername} />
+    <input type="text" onChange={handleUsername} />
     <p>비밀번호 입력</p>
     <input type="password" onChange={handlePassword}></input>
     <br />

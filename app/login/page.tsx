@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import { useState } from "react";
-const SERVER = "http://localhost:8080";
+const SERVER = "http://localhost:8080/api";
 
 
 export default function Login() {
@@ -26,8 +26,21 @@ export default function Login() {
     }
 
     axios.post(url, data, {headers: config}).then(res => {
-      alert("리스판스가 가져온 이름: " + JSON.stringify(res.data.username))
-      alert("리스판스가 가져온 비밀번호:"+JSON.stringify(res.data.password))
+      const message = res.data.message
+      alert((message))
+
+    //   if(message == FAIL){
+    //     
+    // }else if (!optUser.getPassword().equals(paramMap.get("password"))){
+    //     System.out.println(Messenger.WRONG_PASSWORD);
+    //     map.put("message", Messenger.WRONG_PASSWORD);
+    // }else {
+    //     System.out.println(Messenger.SUCCESS);
+    //     map.put("message", Messenger.SUCCESS);
+    //     System.out.println("ID is "+ optUser.getId());
+    //     System.out.println("PW is "+ optUser.getPassword());
+    //     System.out.println("User is "+null);
+    // }
     })
 
   }

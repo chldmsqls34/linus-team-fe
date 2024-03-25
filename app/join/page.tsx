@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useReducer, useState } from "react";
 import { useRouter } from "next/navigation";
-const SERVER = "http://localhost:8080/api";
+const SERVER = "http://localhost:8080";
 import './style.css';
 
 
@@ -44,8 +44,8 @@ export default function Join() {
   const handleSubmit = ()=>{
     alert("리퀘스트가 가져가는 아이디 : " + username);
     alert("리퀘스트가 가져가는 비밀번호 :"+password)
-    const url = `${SERVER}/join`
-    const data = { username, password, name, phone, job, height, weight };
+    const url = `${SERVER}/api/users`
+    const data = { username, password, name, phone, address, job, height, weight };
     const config = {
       "Cache-Control": "no-cache",
       "Content-Type": "application/json",

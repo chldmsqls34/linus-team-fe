@@ -1,7 +1,10 @@
 "use client";
 import axios from "axios";
-import { useState } from "react";
-const SERVER = "http://localhost:8080";
+import { useReducer, useState } from "react";
+import { useRouter } from "next/navigation";
+const SERVER = "http://localhost:8080/api";
+import './style.css';
+
 
 
 export default function Join() {

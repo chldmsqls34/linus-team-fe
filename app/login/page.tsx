@@ -1,5 +1,7 @@
 "use client";
 import axios from "axios";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 const SERVER = "http://localhost:8080";
 
@@ -13,6 +15,7 @@ export default function Login() {
   const handlePassword = (e : any)=>{
     setPassword(e.target.value)
   }
+  const router = useRouter();
   const handleSubmit = ()=>{
     alert("리퀘스트가 가져가는 아이디 : " + username);
     alert("리퀘스트가 가져가는 비밀번호 :"+password)
@@ -29,17 +32,13 @@ export default function Login() {
       const message = res.data.message
       alert((message))
 
-    //   if(message == FAIL){
-    //     
-    // }else if (!optUser.getPassword().equals(paramMap.get("password"))){
-    //     System.out.println(Messenger.WRONG_PASSWORD);
+      if(message === 'SUCCESS'){
+        router.push('/articles');
+      }
+    //else if (message === 'WRONG_PASSWORD');
     //     map.put("message", Messenger.WRONG_PASSWORD);
     // }else {
-    //     System.out.println(Messenger.SUCCESS);
-    //     map.put("message", Messenger.SUCCESS);
-    //     System.out.println("ID is "+ optUser.getId());
-    //     System.out.println("PW is "+ optUser.getPassword());
-    //     System.out.println("User is "+null);
+    //     
     // }
     })
 

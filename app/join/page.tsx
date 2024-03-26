@@ -40,6 +40,7 @@ export default function Join() {
   const handleWeight = (e : any)=>{
     setWeight(e.target.value)
   }
+  const router = useRouter();
 
   const handleSubmit = ()=>{
     alert("리퀘스트가 가져가는 아이디 : " + username);
@@ -54,8 +55,8 @@ export default function Join() {
     }
 
     axios.post(url, data, {headers: config}).then(res => {
-      alert("리스판스가 가져온 이름: " + JSON.stringify(res.data.username))
-      alert("리스판스가 가져온 비밀번호:"+JSON.stringify(res.data.password))
+      alert("리스판스가 가져온 정보 : " + JSON.stringify(res.data))
+      router.push('/login');
     })
   }
 

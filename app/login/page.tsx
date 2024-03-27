@@ -46,13 +46,13 @@ export default function Login() {
   }
 
   return (
-    <>
+    <div className="text-center">
     <p>아이디 입력</p>
-    <input type="email" onChange={handleUsername} />
+    <input type="text" onChange={handleUsername} />
     <p>비밀번호 입력</p>
     <input type="password" onChange={handlePassword}></input>
     <br />
     <button onClick={handleSubmit}>전송</button>
-    </>
+    </div>
   );
 }

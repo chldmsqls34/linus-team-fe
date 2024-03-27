@@ -4,6 +4,7 @@ import { useReducer, useState } from "react";
 import { useRouter } from "next/navigation";
 const SERVER = "http://localhost:8080";
 import './style.css';
+import { text } from "stream/consumers";
 
 
 
@@ -32,7 +33,8 @@ export default function Join() {
   }
   const router = useRouter();
 
-  const handleSubmit =()=> {
+  const handleSubmit =(e:any)=> {
+    e.preventDefault()
     alert("리퀘스트가 가져가는 아이디 : " + username);
     alert("리퀘스트가 가져가는 비밀번호 :"+password)
     const url = `${SERVER}/api/users`

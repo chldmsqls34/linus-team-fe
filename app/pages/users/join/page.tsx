@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 const SERVER = "http://localhost:8080";
 import './style.css';
 import { text } from "stream/consumers";
+import { API } from "@/app/atoms/enums/API";
+import AxiosConfig from "@/app/organisms/configs/axios.config";
 
 
 
@@ -37,18 +39,12 @@ export default function Join() {
     e.preventDefault()
     alert("리퀘스트가 가져가는 아이디 : " + username);
     alert("리퀘스트가 가져가는 비밀번호 :"+password)
-    const url = `${SERVER}/api/users`
-    const data = { username,password,repeatPassword,name,phone,address,job,height,weight};
-    const config = {
-      "Cache-Control": "no-cache",
-      "Content-Type": "application/json",
-      Authorization: "Bearer blah ~",
-      "Access-Control-Allow-Origin": "*",
-    }
-
-    axios.post(url, data, {headers: config}).then(res => {
+    
+    axios.post(`${API.SERVER}/api/users`,
+    { username,password,repeatPassword,name,phone,address,job,height,weight},
+    AxiosConfig()).then(res => {
       alert("리스판스가 가져온 정보: " + JSON.stringify(res.data))
-      router.push("/login")
+      router.push("./login")
     })
   }
   

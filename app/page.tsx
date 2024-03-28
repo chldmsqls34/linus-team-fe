@@ -5,26 +5,22 @@ import axios from "axios";
 import Link from "next/link";
 import './globals.css'
 import { Button, Input } from "@mui/material";
+import { PG } from "./atoms/enums/PG";
+import { API } from "./atoms/enums/API";
+import AxiosConfig from "./organisms/configs/axios.config";
 
-const SERVER = "http://localhost:8080";
 
 export default function Home() {
     const [name, setName] = useState("");
+
     const handleChange = (e: any) => {
         setName(e.target.value);
     };
+    
     const handleClick = () => {
         alert("리퀘스트가 가져가는 이름 : " + name);
-        const url = `${SERVER}/name`;
-        const data = {name: name};
-        const config = {
-            "Cache-Control": "no-cache",
-            "Content-Type": "application/json",
-            Authorization: "Bearer blah ~",
-            "Access-Control-Allow-Origin": "*",
-        }
-
-        axios.post(url, data, {headers: config}).then(res => {
+        axios.post(`${API.SERVER}/name`, {name: name}, AxiosConfig())
+        .then(res => {
             alert("리스판스가 가져온 이름: " + JSON.stringify(res.data))
         })
     }
@@ -38,11 +34,17 @@ export default function Home() {
         <br/>
         <Button onClick={handleClick}>전송</Button>
         <br/>
-        <Link href={"/login"}>로그인</Link>
+        <Link href={`${PG.USER}/login`}>로그인</Link>
         <br/>
-        <Link href={"/join"}>회원가입</Link>
+        <Link href={`${PG.USER}/join`}>회원가입</Link>
         <br/>
-        <Link href={"/mui-demo"}>MUI데모</Link>
+        <Link href={`${PG.DEMO}/mui-demo`}>MUI데모</Link>
+        <br/>
+        <Link href={`${PG.DEMO}/counter`}>카운터데모</Link>
+        <br/>
+        <Link href={`${PG.DEMO}/counter/container`}>리덕스데모</Link>
+        <br/>
+        <Link href={`${PG.DEMO}/companies`}>company</Link>
         </div>
     );
 }

@@ -1,10 +1,11 @@
 "use client";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { Box } from "@mui/material";
+import MuiDemoColumns from "@/app/organisms/columns/mui-demo-columns";
+import MuiDemoRows from "@/app/organisms/rows/mui-demo-rows";
 const SERVER = "http://localhost:8080";
-
-
 
 interface IArticle{
     id : number,
@@ -49,26 +50,23 @@ export default function Articles(){
 
     return (
     <div>
-        <h2>HTML Table</h2>
-
-        <table>
-            <thead>
-            <tr>
-                <th>제목</th>
-                <th>내용</th>
-                <th>작성자</th>
-                <th>등록일</th>
-            </tr>
-        </thead>
-        <tbody>{articles.map((props:IArticle) =>
-          <tr key={props.id}>
-          <td>{props.title}</td>
-          <td>{props.content}</td>
-          <td>{props.writer}</td>
-          <td>{props.registerdate}</td>
-        </tr>)}
-        </tbody>
-        </table>
+        <h2>게시글 목록</h2>
+        <Box sx={{ height: 400, width: '100%' }}>
+    <DataGrid
+      rows={MuiDemoRows()}
+      columns={MuiDemoColumns()}
+      initialState={{
+        pagination: {
+          paginationModel: {
+            pageSize: 5,
+          },
+        },
+      }}
+      pageSizeOptions={[5]}
+      checkboxSelection
+      disableRowSelectionOnClick
+    />
+  </Box>
       </div>)
 }
 

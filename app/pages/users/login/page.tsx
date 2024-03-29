@@ -1,9 +1,12 @@
 "use client";
+import { API } from "@/app/atoms/enums/API";
+import { PG } from "@/app/atoms/enums/PG";
+import AxiosConfig from "@/app/organisms/configs/axios.config";
 import axios from "axios";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-const SERVER = "http://localhost:8080";
+
+
 
 
 export default function Login() {
@@ -16,43 +19,35 @@ export default function Login() {
     setPassword(e.target.value)
   }
   const router = useRouter();
+
   const handleSubmit = ()=>{
     alert("리퀘스트가 가져가는 아이디 : " + username);
-    alert("리퀘스트가 가져가는 비밀번호 :"+password)
-    const url = `${SERVER}/api/login`
-    const data = { username,password};
-    const config = {
-      "Cache-Control": "no-cache",
-      "Content-Type": "application/json",
-      Authorization: "Bearer blah ~",
-      "Access-Control-Allow-Origin": "*",
-    }
-
-    axios.post(url, data, {headers: config}).then(res => {
+    
+    axios.post(`${API.SERVER}/api/login`, {username,password}, AxiosConfig())
+    .then(res => {
       const message = res.data.message
       alert((message))
-
-      if(message === 'SUCCESS'){
-        router.push('/articles');
+      if(message=='SUCCESS'){
+        router.push(`${PG.BOARD}/articles/new-article`)
+      }else if(message=='FAIL'){
+        alert("FAIL");
+      }else if(message=='WRONG_PASSWORD'){
+        alert("WRONG_PASSWORD")
+      }else{
+        alert("지정되지 않은 값");
       }
-    //else if (message === 'WRONG_PASSWORD');
-    //     map.put("message", Messenger.WRONG_PASSWORD);
-    // }else {
-    //     
-    // }
     })
 
   }
 
   return (
-    <>
+    <div className="text-center">
     <p>아이디 입력</p>
     <input type="text" onChange={handleUsername} />
     <p>비밀번호 입력</p>
     <input type="password" onChange={handlePassword}></input>
     <br />
     <button onClick={handleSubmit}>전송</button>
-    </>
+    </div>
   );
 }
-

@@ -3,7 +3,7 @@
 import {useState} from "react";
 import axios from "axios";
 import Link from "next/link";
-import './globals.css'
+// import './globals.css'
 import { Button, Input } from "@mui/material";
 import { PG } from "./atoms/enums/PG";
 import { API } from "./atoms/enums/API";
@@ -40,9 +40,11 @@ export default function Home() {
         <br/>
         <Link href={`${PG.DEMO}/mui-demo`}>MUI데모</Link>
         <br/>
+        <Link href={`${PG.BOARD}/articles/new-article`}>article</Link>
+        <br/>
         <Link href={`${PG.DEMO}/counter`}>카운터데모</Link>
         <br/>
-        <Link href={`${PG.DEMO}/counter/container`}>리덕스데모</Link>
+        <Link href={`${PG.DEMO}/redux-counter`}>리덕스카운터데모</Link>
         <br/>
         <Link href={`${PG.DEMO}/companies`}>company</Link>
         </div>

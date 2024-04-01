@@ -28,8 +28,5 @@ const DataGridDemoPage : NextPage = () => {
   );
 }
 
-export function test(){
-
-}
 
 export default DataGridDemoPage

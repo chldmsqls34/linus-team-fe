@@ -1,3 +1,5 @@
+import { IUser } from "./user.model";
+
 export const initialState: IUser = {
     id: 0,
     username: '',
@@ -7,5 +9,6 @@ export const initialState: IUser = {
     address: '',
     job: '',
     height: '',
-    weight: ''
+    weight: '',
+    array : []
 }

@@ -1,22 +1,23 @@
-"use client"; //this is a client side component
-
+import axios from 'axios';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { createSlice } from "@reduxjs/toolkit";
-import { initialState } from "./counter.init";
+import { initialState } from './counter.init';
+
 
 export const counterSlice = createSlice({
-  name: "counter",
+  name: "count",
   initialState,
   reducers: {
-    increment: (state) => {
+    handlePlus: (state) => {
       state.value += 1;
     },
-    decrement: (state) => {
+    handleMinus: (state) => {
       state.value -= 1;
     },
     
   },
 });
 
-export const { increment, decrement } = counterSlice.actions
-export const getCount = (state:any) => state.count.value
+export const { handlePlus, handleMinus } = counterSlice.actions
+export const getCount = (state:any) => state.count.value;
 export default counterSlice.reducer;

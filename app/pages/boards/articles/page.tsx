@@ -10,54 +10,70 @@ import AxiosConfig from "@/redux/common/configs/axios-config";
 import MuiDemoRows from "@/app/components/rows/mui-demo-rows";
 import MuiDemoColumns from "@/app/components/columns/mui-demo-columns";
 import { NextPage } from "next";
-import { getArticles } from "@/redux/features/articles/article.service";
-import { useDispatch } from "react-redux"
+import { fetchAllArticles } from "@/redux/features/articles/article.service";
+import { useDispatch, useSelector } from "react-redux"
+import { getAllArticles } from "@/redux/features/articles/article.slice";
 
-// const Article = (v: IArticle)=>
-//     (
-        // <tr key={v.id}>
-        //     <td>{v.title}</td>
-        //     <td>{v.content}</td>
-        //     <td>{v.writer}</td>
-        //     <td>{v.registerDate}</td>
-        // </tr>
-//     )
+
+interface IArticle{
+  id: number,
+  title: string,
+  content: string,
+  writer: string,
+  registerDate: string,
+  array : []
+}
 
 
 const ArticlesPage : NextPage = () => {
-    const router = useRouter();
+
     const dispatch = useDispatch()
-    const [articles, setArticles] = useState([])
+    
+    const allArticles: [] = useSelector(getAllArticles)
 
-useEffect(()=>{
-  dispatch(getArticles())
-}, [])
+    if(allArticles !== undefined){
+      console.log('allArticle is not undefined')
+      console.log('length is'+ allArticles.length)
+      for(let i = 0;i<allArticles.length;i++){
+        console.log(JSON.stringify(allArticles[i]))
+      }
+      
+    }else{
+      console.log('allArticles is undefined')
+    }
+
+    useEffect(()=>{
+      dispatch(fetchAllArticles(1))
+    }, [dispatch])
 
 
-    const article = [
-        {id : 1, title : '', content : '', writer : '', registerDate : ''}    
-    ]
+  
 
     // const articleList = article.map((v) => (<Article key={v.id}{...v}/>))
 
     return (<>
         <h2>게시글 목록</h2>
-        <Box sx={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={MuiDemoRows()}
-        columns={MuiDemoColumns()}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 5,
-            },
-          },
-        }}
-        pageSizeOptions={[5]}
-        checkboxSelection
-        disableRowSelectionOnClick
-      />
-    </Box>
+        <table border={1}>
+          <thead>
+          <tr>
+              <th>제목</th>
+              <th>내용</th>
+              <th>작성자</th>
+              <th>등록일</th>
+          </tr>
+          </thead>
+          <tbody>
+            {allArticles?.map((props:IArticle) =>(
+              <tr key={props.id}>
+                <td>{props.title}</td>
+                <td>{props.content}</td>
+                <td>{props.writer}</td>
+                <td>{props.registerDate}</td>
+              </tr>))}
+          </tbody>
+        </table>
+        <></>
+        
     </>)
 }
 

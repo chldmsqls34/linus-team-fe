@@ -45,7 +45,7 @@ const JoinPage : NextPage = () => {
 
   const handleSubmit = ()=>{
     alert("리퀘스트가 가져가는 아이디 : " + username);
-    axios.post(`${API.SERVER}/join`, { username, password, name, phone, address, job, height, weight }, AxiosConfig()).then(res => {
+    axios.post(`${API.SERVER}/users`, { username, password, name, phone, address, job, height, weight }, AxiosConfig()).then(res => {
       alert("리스판스가 가져온 정보 : " + JSON.stringify(res.data))
       router.push('./login');
     })

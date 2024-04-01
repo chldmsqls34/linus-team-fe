@@ -3,5 +3,6 @@ export interface IArticle{
     title: string,
     content: string,
     writer: string,
-    registerDate: string
+    registerDate: string,
+    array : []
 }

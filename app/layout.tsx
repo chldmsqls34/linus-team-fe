@@ -1,12 +1,11 @@
-// import ReduxProvider from "@/lib/redux-provider";
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import dynamic from "next/dynamic";
 
-const ReduxProvider = dynamic(()=>import("@/lib/redux-provider"),{
+const ReduxProvider = dynamic(()=>import("@/redux/redux-provider"),{
   ssr: false
-});
+})
 
 const inter = Inter({ subsets: ["latin"] });
 

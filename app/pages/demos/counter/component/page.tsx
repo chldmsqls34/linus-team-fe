@@ -1,23 +1,23 @@
+'use client'
 
-import { Button } from "@mui/material"
 import React from "react"
+import { Button } from "@mui/material";
 
 
-interface Props{
+interface ICounter{
     count: number,
-    handlePlus: ()=> 0,
-    handleMinus: ()=> 0
+    handlePlus: ()=>0,
+    handleMinus: ()=>0
 }
 
+const CounterComponent = React.memo(({count, handlePlus, handleMinus}: ICounter) => {
+    return (
+    <div>
+    <h1>Counter : {count}</h1>
+    <Button onClick={handlePlus}>+</Button><br />
+    <Button onClick={handleMinus}>-</Button>
 
-const CounterComponent = React.memo(({count,handlePlus,handleMinus}: Props) => {
-    return(<>
-        <h1> Counter : {count}</h1>
-        <Button onClick={handlePlus}>+</Button>
-        <Button onClick={handleMinus}>-</Button>
-        </>
-        )
-}
-)
+    </div>)
+})
 
 export default CounterComponent

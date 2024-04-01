@@ -1,31 +1,33 @@
-"use client";
-import CompanyColumns from "@/app/organisms/columns/company-columns";
-import CompanyRows from "@/app/organisms/rows/company-rows";
+'use client'
+
+import CompaniseColumns from "@/app/components/columns/companise-columns";
+import CompaniseRows from "@/app/components/rows/companise-rows";
 import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import React from "react";
+import { NextPage } from "next";
+import { useRouter } from "next/navigation";
 
+const CompanisePage : NextPage = () => {
+    const router = useRouter(); 
 
-export default function Companies(){
-    const rows = CompanyRows()
-    const columns = CompanyColumns({} as ICompany)
-    
-    return  (
+    return (
         <Box sx={{ height: 400, width: '100%' }}>
-        <DataGrid 
-          rows={rows}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 5,
+          <DataGrid
+            rows={CompaniseRows()}
+            columns={CompaniseColumns()}
+            initialState={{
+              pagination: {
+                paginationModel: {
+                  pageSize: 5,
+                },
               },
-            },
-          }}
-          pageSizeOptions={[5]}
-          checkboxSelection
-          disableRowSelectionOnClick
-        />
+            }}
+            pageSizeOptions={[5]}
+            checkboxSelection
+            disableRowSelectionOnClick
+          />
         </Box>
       );
 }
+
+export default CompanisePage

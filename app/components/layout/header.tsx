@@ -14,14 +14,16 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { PG } from '@/redux/common/enums/PG';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 
-const link =[ `${PG.USER}/join`,`${PG.USER}/login`,`${PG.DEMO}/redux-counter`,`${PG.BOARD}/articles`,`${PG.USER}/users`]
+
+const link =[ `${PG.USER}/join`,`${PG.USER}/login`,`${PG.DEMO}/redux-counter`,`${PG.BOARD}/articles`,`${PG.USER}`]
 const pages = ['회원가입','로그인', '카운터','게시글목록', '사용자목록'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Header() {
+  const router = useRouter()
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -93,9 +95,11 @@ function Header() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center" sx={{fontSize:"1.5rem"}}>  {page}</Typography>
+              {pages.map((page,i) => (
+                <MenuItem key={page} onClick={()=>{
+                  router.push(link[i])
+                }}>
+                  <Typography textAlign="center" sx={{fontSize:"1.5rem"}}>{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -106,9 +110,11 @@ function Header() {
             {pages.map((page,i) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={()=>{
+                  router.push(link[i])
+                }}
                 sx={{ my: 2, color: 'white', display: 'block', fontSize: '15px'}}
-              ><Link href={link[i]}>{page}</Link>
+              >{page}
               </Button>
             ))}
           </Box>

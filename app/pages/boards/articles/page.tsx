@@ -13,6 +13,7 @@ import { NextPage } from "next";
 import { fetchAllArticles } from "@/redux/features/articles/article.service";
 import { useDispatch, useSelector } from "react-redux"
 import { getAllArticles } from "@/redux/features/articles/article.slice";
+import Columns from "@/app/components/articles/colums";
 
 
 interface IArticle{
@@ -25,7 +26,7 @@ interface IArticle{
 }
 
 
-const ArticlesPage : NextPage = () => {
+const ArticlesPage : NextPage = ({data}:any) => {
 
     const dispatch = useDispatch()
     
@@ -53,25 +54,22 @@ const ArticlesPage : NextPage = () => {
 
     return (<>
         <h2>게시글 목록</h2>
-        <table border={1}>
-          <thead>
-          <tr>
-              <th>제목</th>
-              <th>내용</th>
-              <th>작성자</th>
-              <th>등록일</th>
-          </tr>
-          </thead>
-          <tbody>
-            {allArticles?.map((props:IArticle) =>(
-              <tr key={props.id}>
-                <td>{props.title}</td>
-                <td>{props.content}</td>
-                <td>{props.writer}</td>
-                <td>{props.registerDate}</td>
-              </tr>))}
-          </tbody>
-        </table>
+        <Box sx={{ height: 400, width: '100%' }}>
+      <DataGrid
+        rows={data}
+        columns={Columns()}
+        initialState={{
+          pagination: {
+            paginationModel: {
+              pageSize: 5,
+            },
+          },
+        }}
+        pageSizeOptions={[5]}
+        checkboxSelection
+        disableRowSelectionOnClick
+      />
+    </Box>
         <></>
         
     </>)

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { createAsyncThunk } from '@reduxjs/toolkit';
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from './counter.init';
 

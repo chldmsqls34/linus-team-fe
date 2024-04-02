@@ -13,9 +13,11 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { PG } from '@/redux/common/enums/PG';
+import Link from 'next/link';
 
 
-
+const link =[ `${PG.USER}/join`,`${PG.USER}/login`,`${PG.DEMO}/redux-counter`,`${PG.BOARD}/articles`,`${PG.USER}/users`]
 const pages = ['회원가입','로그인', '카운터','게시글목록', '사용자목록'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -101,13 +103,12 @@ function Header() {
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
          
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {pages.map((page,i) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block', fontSize: '15px'}}
-              >
-                {page}
+              ><Link href={link[i]}>{page}</Link>
               </Button>
             ))}
           </Box>
